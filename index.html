@@ -17,6 +17,14 @@
             align-items: center;
 
         }
+        .clock {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: black;
+            z-index: 1000;
+        }
         .nav {
             margin-top: 30px;
             margin-bottom: 20px;
@@ -91,6 +99,9 @@
             color: #1a0dab;
         }
         @media (max-width: 700px) {
+            .clock {
+                display: none;
+            }
             .skills-list, .projects-list {
                 flex-direction: column;
                 gap: 0;
@@ -119,6 +130,7 @@
     </style>
 </head>
 <body>
+    <div class="clock" id="clock"></div>
     <div class="nav">
         <a href="#">Home</a>
         <a href="https://www.credly.com/users/aashishparuvada" target="_blank" rel="noopener noreferrer">Credly</a>
@@ -203,5 +215,27 @@
     <div style="position:fixed; right:8px; bottom:4px; font-size:9px; opacity:0.18; z-index:9999; pointer-events:none; user-select:none;">
         This site is not broken! It is intentionally designed to reflect my interest in vintage and early internet webpages. The minimal, retro look is a stylistic choice inspired by the simplicity and charm of the 2000s web.
     </div>
+    
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const options = {
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+                timeZoneName: 'short'
+            };
+            const timeString = now.toLocaleString('en-US', options);
+            document.getElementById('clock').textContent = timeString;
+        }
+        
+        // Update clock immediately and then every second
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 </body>
 </html> 
